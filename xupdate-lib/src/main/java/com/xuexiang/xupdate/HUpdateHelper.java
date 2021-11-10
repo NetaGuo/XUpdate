@@ -46,7 +46,7 @@ import static com.xuexiang.xupdate.entity.UpdateError.ERROR.INSTALL_FAILED;
  * @author xuexiang
  * @since 2018/7/10 下午4:27
  */
-public final class _XUpdate {
+public final class HUpdateHelper {
 
     /**
      * 标志当前更新提示是否已显示
@@ -54,53 +54,53 @@ public final class _XUpdate {
     private static boolean sIsShowUpdatePrompter = false;
 
     public static void setIsShowUpdatePrompter(boolean isShowUpdatePrompter) {
-        _XUpdate.sIsShowUpdatePrompter = isShowUpdatePrompter;
+        HUpdateHelper.sIsShowUpdatePrompter = isShowUpdatePrompter;
     }
 
     public static boolean isShowUpdatePrompter() {
-        return _XUpdate.sIsShowUpdatePrompter;
+        return HUpdateHelper.sIsShowUpdatePrompter;
     }
 
     //===========================属性设置===================================//
 
     public static Map<String, Object> getParams() {
-        return XUpdate.get().mParams;
+        return HUpdate.get().mParams;
     }
 
     public static IUpdateHttpService getIUpdateHttpService() {
-        return XUpdate.get().mUpdateHttpService;
+        return HUpdate.get().mUpdateHttpService;
     }
 
     public static IUpdateChecker getIUpdateChecker() {
-        return XUpdate.get().mUpdateChecker;
+        return HUpdate.get().mUpdateChecker;
     }
 
     public static IUpdateParser getIUpdateParser() {
-        return XUpdate.get().mUpdateParser;
+        return HUpdate.get().mUpdateParser;
     }
 
     public static IUpdatePrompter getIUpdatePrompter() {
-        return XUpdate.get().mUpdatePrompter;
+        return HUpdate.get().mUpdatePrompter;
     }
 
     public static IUpdateDownloader getIUpdateDownLoader() {
-        return XUpdate.get().mUpdateDownloader;
+        return HUpdate.get().mUpdateDownloader;
     }
 
     public static boolean isGet() {
-        return XUpdate.get().mIsGet;
+        return HUpdate.get().mIsGet;
     }
 
     public static boolean isWifiOnly() {
-        return XUpdate.get().mIsWifiOnly;
+        return HUpdate.get().mIsWifiOnly;
     }
 
     public static boolean isAutoMode() {
-        return XUpdate.get().mIsAutoMode;
+        return HUpdate.get().mIsAutoMode;
     }
 
     public static String getApkCacheDir() {
-        return XUpdate.get().mApkCacheDir;
+        return HUpdate.get().mApkCacheDir;
     }
 
     //===========================文件加密===================================//
@@ -111,10 +111,10 @@ public final class _XUpdate {
      * @param file 需要加密的文件
      */
     public static String encryptFile(File file) {
-        if (XUpdate.get().mFileEncryptor == null) {
-            XUpdate.get().mFileEncryptor = new DefaultFileEncryptor();
+        if (HUpdate.get().mFileEncryptor == null) {
+            HUpdate.get().mFileEncryptor = new DefaultFileEncryptor();
         }
-        return XUpdate.get().mFileEncryptor.encryptFile(file);
+        return HUpdate.get().mFileEncryptor.encryptFile(file);
     }
 
     /**
@@ -125,16 +125,16 @@ public final class _XUpdate {
      * @return 文件是否有效
      */
     public static boolean isFileValid(String encrypt, File file) {
-        if (XUpdate.get().mFileEncryptor == null) {
-            XUpdate.get().mFileEncryptor = new DefaultFileEncryptor();
+        if (HUpdate.get().mFileEncryptor == null) {
+            HUpdate.get().mFileEncryptor = new DefaultFileEncryptor();
         }
-        return XUpdate.get().mFileEncryptor.isFileValid(encrypt, file);
+        return HUpdate.get().mFileEncryptor.isFileValid(encrypt, file);
     }
 
     //===========================apk安装监听===================================//
 
     public static OnInstallListener getOnInstallListener() {
-        return XUpdate.get().mOnInstallListener;
+        return HUpdate.get().mOnInstallListener;
     }
 
     /**
@@ -171,26 +171,26 @@ public final class _XUpdate {
      * @param downloadEntity 文件下载信息
      */
     private static boolean onInstallApk(Context context, File apkFile, DownloadEntity downloadEntity) {
-        if (XUpdate.get().mOnInstallListener == null) {
-            XUpdate.get().mOnInstallListener = new DefaultInstallListener();
+        if (HUpdate.get().mOnInstallListener == null) {
+            HUpdate.get().mOnInstallListener = new DefaultInstallListener();
         }
-        return XUpdate.get().mOnInstallListener.onInstallApk(context, apkFile, downloadEntity);
+        return HUpdate.get().mOnInstallListener.onInstallApk(context, apkFile, downloadEntity);
     }
 
     /**
      * apk安装完毕
      */
     private static void onApkInstallSuccess() {
-        if (XUpdate.get().mOnInstallListener == null) {
-            XUpdate.get().mOnInstallListener = new DefaultInstallListener();
+        if (HUpdate.get().mOnInstallListener == null) {
+            HUpdate.get().mOnInstallListener = new DefaultInstallListener();
         }
-        XUpdate.get().mOnInstallListener.onInstallApkSuccess();
+        HUpdate.get().mOnInstallListener.onInstallApkSuccess();
     }
 
     //===========================更新出错===================================//
 
     public static OnUpdateFailureListener getOnUpdateFailureListener() {
-        return XUpdate.get().mOnUpdateFailureListener;
+        return HUpdate.get().mOnUpdateFailureListener;
     }
 
     /**
@@ -218,10 +218,10 @@ public final class _XUpdate {
      * @param updateError
      */
     public static void onUpdateError(@NonNull UpdateError updateError) {
-        if (XUpdate.get().mOnUpdateFailureListener == null) {
-            XUpdate.get().mOnUpdateFailureListener = new DefaultUpdateFailureListener();
+        if (HUpdate.get().mOnUpdateFailureListener == null) {
+            HUpdate.get().mOnUpdateFailureListener = new DefaultUpdateFailureListener();
         }
-        XUpdate.get().mOnUpdateFailureListener.onFailure(updateError);
+        HUpdate.get().mOnUpdateFailureListener.onFailure(updateError);
     }
 
 }

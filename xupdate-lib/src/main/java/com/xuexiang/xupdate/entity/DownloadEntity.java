@@ -19,7 +19,7 @@ package com.xuexiang.xupdate.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 
 import java.io.File;
 
@@ -128,7 +128,7 @@ public class DownloadEntity implements Parcelable {
      * @return 文件是否有效
      */
     public boolean isApkFileValid(File apkFile) {
-        return _XUpdate.isFileValid(mMd5, apkFile);
+        return HUpdateHelper.isFileValid(mMd5, apkFile);
     }
 
     @Override

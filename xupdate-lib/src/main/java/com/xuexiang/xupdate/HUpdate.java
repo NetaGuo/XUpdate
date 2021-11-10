@@ -50,10 +50,10 @@ import java.util.TreeMap;
  * @author xuexiang
  * @since 2018/6/29 下午7:47
  */
-public class XUpdate {
+public class HUpdate {
 
     private Application mContext;
-    private static XUpdate sInstance;
+    private static HUpdate sInstance;
 
     //========全局属性==========//
     /**
@@ -112,7 +112,7 @@ public class XUpdate {
 
     //===========================初始化===================================//
 
-    private XUpdate() {
+    private HUpdate() {
         mIsGet = false;
         mIsWifiOnly = true;
         mIsAutoMode = false;
@@ -131,11 +131,11 @@ public class XUpdate {
      *
      * @return 版本更新的入口
      */
-    public static XUpdate get() {
+    public static HUpdate get() {
         if (sInstance == null) {
-            synchronized (XUpdate.class) {
+            synchronized (HUpdate.class) {
                 if (sInstance == null) {
-                    sInstance = new XUpdate();
+                    sInstance = new HUpdate();
                 }
             }
         }
@@ -159,7 +159,7 @@ public class XUpdate {
 
     private void testInitialize() {
         if (mContext == null) {
-            throw new ExceptionInInitializerError("请先在全局Application中调用 XUpdate.get().init() 初始化！");
+            throw new ExceptionInInitializerError("请先在全局Application中调用 HUpdate.get().init() 初始化！");
         }
     }
 
@@ -200,7 +200,7 @@ public class XUpdate {
      * @param value 值
      * @return this
      */
-    public XUpdate param(@NonNull String key, @NonNull Object value) {
+    public HUpdate param(@NonNull String key, @NonNull Object value) {
         if (mParams == null) {
             mParams = new TreeMap<>();
         }
@@ -215,7 +215,7 @@ public class XUpdate {
      * @param params apk更新请求参数
      * @return this
      */
-    public XUpdate params(@NonNull Map<String, Object> params) {
+    public HUpdate params(@NonNull Map<String, Object> params) {
         logForParams(params);
         mParams = params;
         return this;
@@ -241,7 +241,7 @@ public class XUpdate {
      * @param updateHttpService 版本更新网络请求服务API
      * @return this
      */
-    public XUpdate setIUpdateHttpService(@NonNull IUpdateHttpService updateHttpService) {
+    public HUpdate setIUpdateHttpService(@NonNull IUpdateHttpService updateHttpService) {
         UpdateLog.d("设置全局更新网络请求服务:" + updateHttpService.getClass().getCanonicalName());
         mUpdateHttpService = updateHttpService;
         return this;
@@ -253,7 +253,7 @@ public class XUpdate {
      * @param updateChecker 版本更新检查器
      * @return this
      */
-    public XUpdate setIUpdateChecker(@NonNull IUpdateChecker updateChecker) {
+    public HUpdate setIUpdateChecker(@NonNull IUpdateChecker updateChecker) {
         mUpdateChecker = updateChecker;
         return this;
     }
@@ -264,7 +264,7 @@ public class XUpdate {
      * @param updateParser 版本更新的解析器
      * @return this
      */
-    public XUpdate setIUpdateParser(@NonNull IUpdateParser updateParser) {
+    public HUpdate setIUpdateParser(@NonNull IUpdateParser updateParser) {
         mUpdateParser = updateParser;
         return this;
     }
@@ -275,7 +275,7 @@ public class XUpdate {
      * @param updatePrompter 版本更新提示器
      * @return this
      */
-    public XUpdate setIUpdatePrompter(IUpdatePrompter updatePrompter) {
+    public HUpdate setIUpdatePrompter(IUpdatePrompter updatePrompter) {
         mUpdatePrompter = updatePrompter;
         return this;
     }
@@ -286,7 +286,7 @@ public class XUpdate {
      * @param updateDownLoader 版本更新下载器
      * @return this
      */
-    public XUpdate setIUpdateDownLoader(@NonNull IUpdateDownloader updateDownLoader) {
+    public HUpdate setIUpdateDownLoader(@NonNull IUpdateDownloader updateDownLoader) {
         mUpdateDownloader = updateDownLoader;
         return this;
     }
@@ -297,7 +297,7 @@ public class XUpdate {
      * @param isGet 是否使用的是Get请求
      * @return this
      */
-    public XUpdate isGet(boolean isGet) {
+    public HUpdate isGet(boolean isGet) {
         UpdateLog.d("设置全局是否使用的是Get请求:" + isGet);
         mIsGet = isGet;
         return this;
@@ -309,7 +309,7 @@ public class XUpdate {
      * @param isWifiOnly 是否只在wifi下进行版本更新检查
      * @return this
      */
-    public XUpdate isWifiOnly(boolean isWifiOnly) {
+    public HUpdate isWifiOnly(boolean isWifiOnly) {
         UpdateLog.d("设置全局是否只在wifi下进行版本更新检查:" + isWifiOnly);
         mIsWifiOnly = isWifiOnly;
         return this;
@@ -321,7 +321,7 @@ public class XUpdate {
      * @param isAutoMode 是否是自动版本更新模式
      * @return this
      */
-    public XUpdate isAutoMode(boolean isAutoMode) {
+    public HUpdate isAutoMode(boolean isAutoMode) {
         UpdateLog.d("设置全局是否是自动版本更新模式:" + isAutoMode);
         mIsAutoMode = isAutoMode;
         return this;
@@ -333,7 +333,7 @@ public class XUpdate {
      * @param apkCacheDir apk的缓存路径
      * @return this
      */
-    public XUpdate setApkCacheDir(String apkCacheDir) {
+    public HUpdate setApkCacheDir(String apkCacheDir) {
         UpdateLog.d("设置全局apk的缓存路径:" + apkCacheDir);
         mApkCacheDir = apkCacheDir;
         return this;
@@ -345,7 +345,7 @@ public class XUpdate {
      * @param supportSilentInstall 是否支持静默安装
      * @return this
      */
-    public XUpdate supportSilentInstall(boolean supportSilentInstall) {
+    public HUpdate supportSilentInstall(boolean supportSilentInstall) {
         ApkInstallUtils.setSupportSilentInstall(supportSilentInstall);
         return this;
     }
@@ -356,7 +356,7 @@ public class XUpdate {
      * @param isDebug 是否是debug模式
      * @return this
      */
-    public XUpdate debug(boolean isDebug) {
+    public HUpdate debug(boolean isDebug) {
         UpdateLog.debug(isDebug);
         return this;
     }
@@ -367,7 +367,7 @@ public class XUpdate {
      * @param logger 日志打印接口
      * @return this
      */
-    public XUpdate setILogger(@NonNull ILogger logger) {
+    public HUpdate setILogger(@NonNull ILogger logger) {
         UpdateLog.setLogger(logger);
         return this;
     }
@@ -381,7 +381,7 @@ public class XUpdate {
      * @param fileEncryptor 文件加密器
      * @return this
      */
-    public XUpdate setIFileEncryptor(IFileEncryptor fileEncryptor) {
+    public HUpdate setIFileEncryptor(IFileEncryptor fileEncryptor) {
         mFileEncryptor = fileEncryptor;
         return this;
     }
@@ -392,7 +392,7 @@ public class XUpdate {
      * @param onInstallListener 安装监听
      * @return this
      */
-    public XUpdate setOnInstallListener(OnInstallListener onInstallListener) {
+    public HUpdate setOnInstallListener(OnInstallListener onInstallListener) {
         mOnInstallListener = onInstallListener;
         return this;
     }
@@ -405,7 +405,7 @@ public class XUpdate {
      * @param onUpdateFailureListener 更新出错的监听
      * @return this
      */
-    public XUpdate setOnUpdateFailureListener(@NonNull OnUpdateFailureListener onUpdateFailureListener) {
+    public HUpdate setOnUpdateFailureListener(@NonNull OnUpdateFailureListener onUpdateFailureListener) {
         mOnUpdateFailureListener = onUpdateFailureListener;
         return this;
     }

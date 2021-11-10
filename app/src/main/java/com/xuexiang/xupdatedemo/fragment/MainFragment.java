@@ -34,8 +34,8 @@ import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.base.XPageSimpleListFragment;
 import com.xuexiang.xpage.enums.CoreAnim;
 import com.xuexiang.xpage.utils.TitleBar;
-import com.xuexiang.xupdate.XUpdate;
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.proxy.impl.DefaultUpdateChecker;
 import com.xuexiang.xupdate.proxy.impl.DefaultUpdateParser;
@@ -66,7 +66,7 @@ import static android.app.Activity.RESULT_OK;
  * @author xuexiang
  * @since 2018/7/9 下午2:20
  */
-@Page(name = "XUpdate 版本更新", anim = CoreAnim.none)
+@Page(name = "HUpdate 版本更新", anim = CoreAnim.none)
 public class MainFragment extends XPageSimpleListFragment {
 
     private String mUpdateUrl = "https://gitee.com/xuexiangjys/XUpdate/raw/master/jsonapi/update_test.json";
@@ -113,32 +113,32 @@ public class MainFragment extends XPageSimpleListFragment {
                 openPage(FileMD5Fragment.class);
                 break;
             case 1:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateUrl(mUpdateUrl)
                         .update();
                 break;
             case 2:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateUrl(mUpdateUrl)
                         .supportBackgroundUpdate(true)
                         .update();
                 break;
             case 3:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateUrl(mUpdateUrl)
                         //如果需要完全无人干预，自动更新，需要root权限【静默安装需要】
                         .isAutoMode(true)
                         .update();
                 break;
             case 4:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateUrl(mUpdateUrl2)
                         .update();
                 break;
             case 5:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateHttpService(new XHttpUpdateHttpService("https://gitee.com"))
-                        .updateUrl("/xuexiangjys/XUpdate/raw/master/jsonapi/update_test.json")
+                        .updateUrl("/xuexiangjys/HUpdate/raw/master/jsonapi/update_test.json")
                         .promptThemeColor(ResUtils.getColor(R.color.update_theme_color))
                         .promptButtonTextColor(Color.WHITE)
                         .promptTopResId(R.mipmap.bg_update_top)
@@ -146,13 +146,13 @@ public class MainFragment extends XPageSimpleListFragment {
                         .update();
                 break;
             case 6:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateUrl(mUpdateUrl3)
                         .updateParser(new CustomUpdateParser())
                         .update();
                 break;
             case 7:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .updateUrl(mUpdateUrl3)
                         .updateChecker(new DefaultUpdateChecker() {
                             @Override
@@ -178,7 +178,7 @@ public class MainFragment extends XPageSimpleListFragment {
                         .update();
                 break;
             case 8:
-                XUpdate.newBuild(getActivity())
+                HUpdate.newBuild(getActivity())
                         .supportBackgroundUpdate(true)
 //                        // 忽略下载异常，不关闭更新提示窗
 //                        .promptIgnoreDownloadError(true)
@@ -214,7 +214,7 @@ public class MainFragment extends XPageSimpleListFragment {
 
     @Permission(PermissionConsts.STORAGE)
     private void useApkDownLoadFunction() {
-        XUpdate.newBuild(getActivity())
+        HUpdate.newBuild(getActivity())
                 // 注意在Android10及以上存在存储权限问题，不建议设置在外部存储下载目录
                 .apkCacheDir(PathUtils.getAppExtCachePath())
                 .build()
@@ -254,7 +254,7 @@ public class MainFragment extends XPageSimpleListFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_SELECT_APK_FILE) {
-                _XUpdate.startInstallApk(getContext(), FileUtils.getFileByPath(PathUtils.getFilePathByUri(getContext(), data.getData())));
+                HUpdateHelper.startInstallApk(getContext(), FileUtils.getFileByPath(PathUtils.getFilePathByUri(getContext(), data.getData())));
             }
         }
     }

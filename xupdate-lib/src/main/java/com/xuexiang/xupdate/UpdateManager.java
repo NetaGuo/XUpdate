@@ -44,7 +44,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NETWORK;
-import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NEW_VERSION;
 import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_WIFI;
 import static com.xuexiang.xupdate.entity.UpdateError.ERROR.PROMPT_ACTIVITY_DESTROY;
 
@@ -179,7 +178,7 @@ public class UpdateManager implements IUpdateProxy {
      */
     @Override
     public void update() {
-        UpdateLog.d("XUpdate.update()启动:" + toString());
+        UpdateLog.d("HUpdate.update()启动:" + toString());
         if (mIUpdateProxy != null) {
             mIUpdateProxy.update();
         } else {
@@ -198,14 +197,14 @@ public class UpdateManager implements IUpdateProxy {
                 checkVersion();
             } else {
                 onAfterCheck();
-                _XUpdate.onUpdateError(CHECK_NO_WIFI);
+                HUpdateHelper.onUpdateError(CHECK_NO_WIFI);
             }
         } else {
             if (UpdateUtils.checkNetwork()) {
                 checkVersion();
             } else {
                 onAfterCheck();
-                _XUpdate.onUpdateError(CHECK_NO_NETWORK);
+                HUpdateHelper.onUpdateError(CHECK_NO_NETWORK);
             }
         }
     }
@@ -329,7 +328,7 @@ public class UpdateManager implements IUpdateProxy {
                 startDownload(updateEntity, mOnFileDownloadListener);
             } else {
                 //已经下载好的直接安装
-                _XUpdate.startInstallApk(getContext(), UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
+                HUpdateHelper.startInstallApk(getContext(), UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
             }
         } else {
             if (mIUpdateProxy != null) {
@@ -339,7 +338,7 @@ public class UpdateManager implements IUpdateProxy {
                 if (mIUpdatePrompter instanceof DefaultUpdatePrompter) {
                     Context context = getContext();
                     if (context instanceof FragmentActivity && ((FragmentActivity) context).isFinishing()) {
-                        _XUpdate.onUpdateError(PROMPT_ACTIVITY_DESTROY);
+                        HUpdateHelper.onUpdateError(PROMPT_ACTIVITY_DESTROY);
                     } else {
                         mIUpdatePrompter.showPrompt(updateEntity, updateProxy, mPromptEntity);
                     }
@@ -517,23 +516,23 @@ public class UpdateManager implements IUpdateProxy {
             this.context = context;
 
             params = new TreeMap<>();
-            if (_XUpdate.getParams() != null) {
-                params.putAll(_XUpdate.getParams());
+            if (HUpdateHelper.getParams() != null) {
+                params.putAll(HUpdateHelper.getParams());
             }
 
             promptEntity = new PromptEntity();
 
-            updateHttpService = _XUpdate.getIUpdateHttpService();
+            updateHttpService = HUpdateHelper.getIUpdateHttpService();
 
-            updateChecker = _XUpdate.getIUpdateChecker();
-            updateParser = _XUpdate.getIUpdateParser();
-            updatePrompter = _XUpdate.getIUpdatePrompter();
-            updateDownLoader = _XUpdate.getIUpdateDownLoader();
+            updateChecker = HUpdateHelper.getIUpdateChecker();
+            updateParser = HUpdateHelper.getIUpdateParser();
+            updatePrompter = HUpdateHelper.getIUpdatePrompter();
+            updateDownLoader = HUpdateHelper.getIUpdateDownLoader();
 
-            isGet = _XUpdate.isGet();
-            isWifiOnly = _XUpdate.isWifiOnly();
-            isAutoMode = _XUpdate.isAutoMode();
-            apkCacheDir = _XUpdate.getApkCacheDir();
+            isGet = HUpdateHelper.isGet();
+            isWifiOnly = HUpdateHelper.isWifiOnly();
+            isAutoMode = HUpdateHelper.isAutoMode();
+            apkCacheDir = HUpdateHelper.getApkCacheDir();
         }
 
         /**
@@ -827,7 +826,7 @@ public class UpdateManager implements IUpdateProxy {
 
     @Override
     public String toString() {
-        return "XUpdate{" +
+        return "HUpdate{" +
                 "mUpdateUrl='" + mUpdateUrl + '\'' +
                 ", mParams=" + mParams +
                 ", mApkCacheDir='" + mApkCacheDir + '\'' +

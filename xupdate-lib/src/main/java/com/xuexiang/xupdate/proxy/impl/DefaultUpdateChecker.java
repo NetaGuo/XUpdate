@@ -20,7 +20,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.listener.IUpdateParseCallback;
 import com.xuexiang.xupdate.proxy.IUpdateChecker;
@@ -52,9 +52,9 @@ public class DefaultUpdateChecker implements IUpdateChecker {
 
     @Override
     public void checkVersion(boolean isGet, @NonNull String url, @NonNull Map<String, Object> params, final @NonNull IUpdateProxy updateProxy) {
-        if (DownloadService.isRunning() || _XUpdate.isShowUpdatePrompter()) {
+        if (DownloadService.isRunning() || HUpdateHelper.isShowUpdatePrompter()) {
             updateProxy.onAfterCheck();
-            _XUpdate.onUpdateError(CHECK_UPDATING);
+            HUpdateHelper.onUpdateError(CHECK_UPDATING);
             return;
         }
 
@@ -101,7 +101,7 @@ public class DefaultUpdateChecker implements IUpdateChecker {
         if (!TextUtils.isEmpty(result)) {
             processCheckResult(result, updateProxy);
         } else {
-            _XUpdate.onUpdateError(CHECK_JSON_EMPTY);
+            HUpdateHelper.onUpdateError(CHECK_JSON_EMPTY);
         }
     }
 
@@ -113,7 +113,7 @@ public class DefaultUpdateChecker implements IUpdateChecker {
      */
     private void onCheckError(@NonNull IUpdateProxy updateProxy, Throwable error) {
         updateProxy.onAfterCheck();
-        _XUpdate.onUpdateError(CHECK_NET_REQUEST, error.getMessage());
+        HUpdateHelper.onUpdateError(CHECK_NET_REQUEST, error.getMessage());
     }
 
     @Override
@@ -128,7 +128,7 @@ public class DefaultUpdateChecker implements IUpdateChecker {
                             UpdateUtils.processUpdateEntity(updateEntity, result, updateProxy);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            _XUpdate.onUpdateError(CHECK_PARSE, e.getMessage());
+                            HUpdateHelper.onUpdateError(CHECK_PARSE, e.getMessage());
                         }
                     }
                 });
@@ -138,12 +138,12 @@ public class DefaultUpdateChecker implements IUpdateChecker {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            _XUpdate.onUpdateError(CHECK_PARSE, e.getMessage());
+            HUpdateHelper.onUpdateError(CHECK_PARSE, e.getMessage());
         }
     }
 
     @Override
     public void noNewVersion(Throwable throwable) {
-        _XUpdate.onUpdateError(CHECK_NO_NEW_VERSION, throwable != null ? throwable.getMessage() : null);
+        HUpdateHelper.onUpdateError(CHECK_NO_NEW_VERSION, throwable != null ? throwable.getMessage() : null);
     }
 }

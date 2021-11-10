@@ -18,7 +18,7 @@ package com.xuexiang.xupdate.proxy.impl;
 
 import android.text.TextUtils;
 
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.logs.UpdateLog;
 import com.xuexiang.xupdate.utils.UpdateUtils;
@@ -126,7 +126,7 @@ public class DefaultUpdateParser extends AbstractUpdateParser {
      * @return 版本更新的状态
      */
     protected int checkCurrentVersionCode(int updateStatus, int versionCode) {
-        int currentVersionCode = UpdateUtils.getVersionCode(XUpdate.getContext());
+        int currentVersionCode = UpdateUtils.getVersionCode(HUpdate.getContext());
         if (versionCode <= currentVersionCode) {
             UpdateLog.i("云端获取的最新版本小于等于应用当前的版本，不需要更新！当前版本:" + currentVersionCode + ", 云端版本:" + versionCode);
             updateStatus = APIConstant.NO_NEW_VERSION;

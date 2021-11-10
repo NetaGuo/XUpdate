@@ -16,7 +16,7 @@
 
 package com.xuexiang.xupdatedemo.custom;
 
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.proxy.IUpdateHttpService;
 import com.xuexiang.xupdate.proxy.impl.AbstractUpdateParser;
@@ -87,7 +87,7 @@ public class XUpdateServiceParser extends AbstractUpdateParser {
         if (appVersionInfo.getUpdateStatus() != DefaultUpdateParser.APIConstant.NO_NEW_VERSION) {
             int lastVersionCode = appVersionInfo.getVersionCode();
             //最新版本小于等于现在的版本，不需要更新
-            if (lastVersionCode <= UpdateUtils.getVersionCode(XUpdate.getContext())) {
+            if (lastVersionCode <= UpdateUtils.getVersionCode(HUpdate.getContext())) {
                 appVersionInfo.setUpdateStatus(DefaultUpdateParser.APIConstant.NO_NEW_VERSION);
             }
         }

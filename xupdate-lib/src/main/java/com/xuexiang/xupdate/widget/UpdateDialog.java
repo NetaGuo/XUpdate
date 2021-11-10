@@ -36,7 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.xuexiang.xupdate.R;
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.PromptEntity;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.proxy.IPrompterProxy;
@@ -171,13 +171,13 @@ public class UpdateDialog extends BaseDialog implements View.OnClickListener, ID
 
     @Override
     public void show() {
-        _XUpdate.setIsShowUpdatePrompter(true);
+        HUpdateHelper.setIsShowUpdatePrompter(true);
         super.show();
     }
 
     @Override
     public void dismiss() {
-        _XUpdate.setIsShowUpdatePrompter(false);
+        HUpdateHelper.setIsShowUpdatePrompter(false);
         clearIPrompterProxy();
         super.dismiss();
     }
@@ -411,18 +411,18 @@ public class UpdateDialog extends BaseDialog implements View.OnClickListener, ID
     }
 
     private void onInstallApk() {
-        _XUpdate.startInstallApk(getContext(), UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
+        HUpdateHelper.startInstallApk(getContext(), UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
     }
 
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        _XUpdate.setIsShowUpdatePrompter(true);
+        HUpdateHelper.setIsShowUpdatePrompter(true);
     }
 
     @Override
     public void onDetachedFromWindow() {
-        _XUpdate.setIsShowUpdatePrompter(false);
+        HUpdateHelper.setIsShowUpdatePrompter(false);
         super.onDetachedFromWindow();
     }
 

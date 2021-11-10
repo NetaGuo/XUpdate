@@ -26,7 +26,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresPermission;
 
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.utils.ShellUtils.CommandResult;
 
 import java.io.File;
@@ -247,7 +247,7 @@ public final class ApkInstallUtils {
                 return true;
             }
         } catch (Exception e) {
-            _XUpdate.onUpdateError(INSTALL_FAILED, "Apk installation failed using the intent of the system!");
+            HUpdateHelper.onUpdateError(INSTALL_FAILED, "Apk installation failed using the intent of the system!");
         }
         return false;
     }
@@ -270,7 +270,7 @@ public final class ApkInstallUtils {
             intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
             return intent;
         } catch (Exception e) {
-            _XUpdate.onUpdateError(INSTALL_FAILED, "Failed to get intent for installation！");
+            HUpdateHelper.onUpdateError(INSTALL_FAILED, "Failed to get intent for installation！");
         }
         return null;
     }

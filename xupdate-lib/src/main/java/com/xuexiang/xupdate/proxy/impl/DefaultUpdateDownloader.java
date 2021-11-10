@@ -26,7 +26,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.proxy.IUpdateDownloader;
 import com.xuexiang.xupdate.service.DownloadService;
@@ -159,7 +159,7 @@ public class DefaultUpdateDownloader implements IUpdateDownloader {
             mDownloadBinder.stop("取消下载");
         }
         if (mIsBound && mServiceConnection != null) {
-            XUpdate.getContext().unbindService(mServiceConnection);
+            HUpdate.getContext().unbindService(mServiceConnection);
             mIsBound = false;
         }
     }

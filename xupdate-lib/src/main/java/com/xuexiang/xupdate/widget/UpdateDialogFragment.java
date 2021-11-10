@@ -46,7 +46,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.xuexiang.xupdate.R;
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.PromptEntity;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.proxy.IPrompterProxy;
@@ -147,7 +147,7 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _XUpdate.setIsShowUpdatePrompter(true);
+        HUpdateHelper.setIsShowUpdatePrompter(true);
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.XUpdate_Fragment_Dialog);
         mCurrentOrientation = getResources().getConfiguration().orientation;
 
@@ -363,7 +363,7 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
                 // 升级
                 installApp();
             } else {
-                _XUpdate.onUpdateError(DOWNLOAD_PERMISSION_DENIED);
+                HUpdateHelper.onUpdateError(DOWNLOAD_PERMISSION_DENIED);
                 dismissDialog();
             }
         }
@@ -480,7 +480,7 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
     }
 
     private void onInstallApk() {
-        _XUpdate.startInstallApk(getContext(), UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
+        HUpdateHelper.startInstallApk(getContext(), UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
     }
 
     /**
@@ -501,7 +501,7 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
         try {
             super.show(manager, tag);
         } catch (Exception e) {
-            _XUpdate.onUpdateError(PROMPT_UNKNOWN, e.getMessage());
+            HUpdateHelper.onUpdateError(PROMPT_UNKNOWN, e.getMessage());
         }
     }
 
@@ -516,7 +516,7 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
 
     @Override
     public void onDestroyView() {
-        _XUpdate.setIsShowUpdatePrompter(false);
+        HUpdateHelper.setIsShowUpdatePrompter(false);
         super.onDestroyView();
     }
 

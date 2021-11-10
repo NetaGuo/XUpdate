@@ -21,7 +21,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.View;
 
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdatedemo.R;
 
 /**
@@ -43,26 +43,26 @@ public class UpdateActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btn_update:
-                XUpdate.newBuild(this)
+                HUpdate.newBuild(this)
                         .updateUrl(mUpdateUrl)
                         .update();
                 break;
             case R.id.btn_support_background_update:
-                XUpdate.newBuild(this)
+                HUpdate.newBuild(this)
                         .updateUrl(mUpdateUrl)
                         .promptWidthRatio(0.7F)
                         .supportBackgroundUpdate(true)
                         .update();
                 break;
             case R.id.btn_auto_update:
-                XUpdate.newBuild(this)
+                HUpdate.newBuild(this)
                         .updateUrl(mUpdateUrl)
                         //如果需要完全无人干预，自动更新，需要root权限【静默安装需要】
                         .isAutoMode(true)
                         .update();
                 break;
             case R.id.btn_force_update:
-                XUpdate.newBuild(this)
+                HUpdate.newBuild(this)
                         .updateUrl(mUpdateUrl2)
                         .update();
                 break;

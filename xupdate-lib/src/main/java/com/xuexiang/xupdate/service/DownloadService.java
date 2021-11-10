@@ -35,9 +35,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdate.R;
-import com.xuexiang.xupdate.XUpdate;
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.DownloadEntity;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.logs.UpdateLog;
@@ -76,9 +76,9 @@ public class DownloadService extends Service {
      * @param connection
      */
     public static void bindService(ServiceConnection connection) {
-        Intent intent = new Intent(XUpdate.getContext(), DownloadService.class);
-        XUpdate.getContext().startService(intent);
-        XUpdate.getContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        Intent intent = new Intent(HUpdate.getContext(), DownloadService.class);
+        HUpdate.getContext().startService(intent);
+        HUpdate.getContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
         mIsRunning = true;
     }
 
@@ -422,7 +422,7 @@ public class DownloadService extends Service {
                     mNotificationManager.cancel(DOWNLOAD_NOTIFY_ID);
 
                     if (mIsAutoInstall) {
-                        _XUpdate.startInstallApk(DownloadService.this, file, mDownloadEntity);
+                        HUpdateHelper.startInstallApk(DownloadService.this, file, mDownloadEntity);
                     } else {
                         showDownloadCompleteNotification(file);
                     }
@@ -442,7 +442,7 @@ public class DownloadService extends Service {
                 return;
             }
 
-            _XUpdate.onUpdateError(DOWNLOAD_FAILED, throwable != null ? throwable.getMessage() : "unknown error!");
+            HUpdateHelper.onUpdateError(DOWNLOAD_FAILED, throwable != null ? throwable.getMessage() : "unknown error!");
             //App前台运行
             dispatchOnError(throwable);
             try {

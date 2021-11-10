@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.xuexiang.xupdate.R;
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.PromptEntity;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.proxy.IPrompterProxy;
@@ -122,7 +122,7 @@ public class UpdateDialogActivity extends AppCompatActivity implements View.OnCl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xupdate_layout_update_prompter);
-        _XUpdate.setIsShowUpdatePrompter(true);
+        HUpdateHelper.setIsShowUpdatePrompter(true);
         initView();
         initData();
     }
@@ -319,7 +319,7 @@ public class UpdateDialogActivity extends AppCompatActivity implements View.OnCl
                 // 升级
                 installApp();
             } else {
-                _XUpdate.onUpdateError(DOWNLOAD_PERMISSION_DENIED);
+                HUpdateHelper.onUpdateError(DOWNLOAD_PERMISSION_DENIED);
                 dismissDialog();
             }
         }
@@ -436,7 +436,7 @@ public class UpdateDialogActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void onInstallApk() {
-        _XUpdate.startInstallApk(this, UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
+        HUpdateHelper.startInstallApk(this, UpdateUtils.getApkFileByUpdateEntity(mUpdateEntity), mUpdateEntity.getDownLoadEntity());
     }
 
     /**
@@ -449,7 +449,7 @@ public class UpdateDialogActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onStop() {
         if (isFinishing()) {
-            _XUpdate.setIsShowUpdatePrompter(false);
+            HUpdateHelper.setIsShowUpdatePrompter(false);
             clearIPrompterProxy();
         }
         super.onStop();

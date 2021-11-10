@@ -20,7 +20,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.DownloadEntity;
 import com.xuexiang.xupdate.listener.OnInstallListener;
 import com.xuexiang.xupdate.utils.ApkInstallUtils;
@@ -43,7 +43,7 @@ public class DefaultInstallListener implements OnInstallListener {
         if (checkApkFile(downloadEntity, apkFile)) {
             return installApkFile(context, apkFile);
         } else {
-            _XUpdate.onUpdateError(INSTALL_FAILED, "Apk file verify failed, please check whether the MD5 value you set is correct！");
+            HUpdateHelper.onUpdateError(INSTALL_FAILED, "Apk file verify failed, please check whether the MD5 value you set is correct！");
             return false;
         }
     }
@@ -70,7 +70,7 @@ public class DefaultInstallListener implements OnInstallListener {
         try {
             return ApkInstallUtils.install(context, apkFile);
         } catch (IOException e) {
-            _XUpdate.onUpdateError(INSTALL_FAILED, "An error occurred while install apk:" + e.getMessage());
+            HUpdateHelper.onUpdateError(INSTALL_FAILED, "An error occurred while install apk:" + e.getMessage());
         }
         return false;
     }

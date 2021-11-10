@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 
 import java.io.Closeable;
 import java.io.File;
@@ -154,9 +154,9 @@ public final class FileUtils {
         if (isScopedStorageMode() && isPublicPath(file)) {
             String filePath = file.getAbsolutePath();
             if (filePath.startsWith(EXT_DOWNLOADS_PATH)) {
-                return getDownloadContentUri(XUpdate.getContext(), file);
+                return getDownloadContentUri(HUpdate.getContext(), file);
             } else if (filePath.startsWith(EXT_PICTURES_PATH) || filePath.startsWith(EXT_DCIM_PATH)) {
-                return getMediaContentUri(XUpdate.getContext(), file);
+                return getMediaContentUri(HUpdate.getContext(), file);
             } else {
                 return getUriForFile(file);
             }
@@ -178,8 +178,8 @@ public final class FileUtils {
             return null;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            String authority = XUpdate.getContext().getPackageName() + ".updateFileProvider";
-            return FileProvider.getUriForFile(XUpdate.getContext(), authority, file);
+            String authority = HUpdate.getContext().getPackageName() + ".updateFileProvider";
+            return FileProvider.getUriForFile(HUpdate.getContext(), authority, file);
         } else {
             return Uri.fromFile(file);
         }
@@ -332,7 +332,7 @@ public final class FileUtils {
     }
 
     private static ContentResolver getContentResolver() {
-        return XUpdate.getContext().getContentResolver();
+        return HUpdate.getContext().getContentResolver();
     }
 
     /**

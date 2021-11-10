@@ -23,7 +23,7 @@ import com.xuexiang.xaop.util.PermissionUtils;
 import com.xuexiang.xhttp2.XHttp;
 import com.xuexiang.xhttp2.XHttpSDK;
 import com.xuexiang.xpage.PageConfig;
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdate.entity.UpdateError;
 import com.xuexiang.xupdate.listener.OnUpdateFailureListener;
 import com.xuexiang.xupdate.utils.UpdateUtils;
@@ -76,7 +76,7 @@ public class App extends Application {
     }
 
     private void initUpdate() {
-        XUpdate.get()
+        HUpdate.get()
                 .debug(true)
                 //默认设置只在wifi下检查版本更新
                 .isWifiOnly(false)

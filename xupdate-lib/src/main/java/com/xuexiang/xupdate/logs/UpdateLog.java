@@ -39,7 +39,7 @@ public final class UpdateLog {
     /**
      * 默认tag
      */
-    public final static String DEFAULT_LOG_TAG = "[XUpdate]";
+    public final static String DEFAULT_LOG_TAG = "[HUpdate]";
     /**
      * 最大日志优先级【日志优先级为最大等级，所有日志都不打印】
      */

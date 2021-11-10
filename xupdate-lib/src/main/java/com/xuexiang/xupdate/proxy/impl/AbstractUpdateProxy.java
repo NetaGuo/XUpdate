@@ -16,7 +16,7 @@
 
 package com.xuexiang.xupdate.proxy.impl;
 
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.proxy.IUpdateProxy;
 
 import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NEW_VERSION;
@@ -41,7 +41,7 @@ public abstract class AbstractUpdateProxy implements IUpdateProxy {
 
     @Override
     public void noNewVersion(Throwable throwable) {
-        _XUpdate.onUpdateError(CHECK_NO_NEW_VERSION, throwable != null ? throwable.getMessage() : null);
+        HUpdateHelper.onUpdateError(CHECK_NO_NEW_VERSION, throwable != null ? throwable.getMessage() : null);
     }
 
 }

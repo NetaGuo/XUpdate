@@ -22,7 +22,7 @@ import android.widget.EditText;
 
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.base.XPageFragment;
-import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdatedemo.R;
 import com.xuexiang.xupdatedemo.custom.XUpdateServiceParser;
 import com.xuexiang.xupdatedemo.utils.SettingSPUtils;
@@ -70,7 +70,7 @@ public class XUpdateServiceFragment extends XPageFragment {
                 }
                 break;
             case R.id.btn_update:
-                XUpdate.newBuild(getContext())
+                HUpdate.newBuild(getContext())
                         .apkCacheDir(PathUtils.getExtDownloadsPath())
                         .updateHttpService(XUpdateServiceParser.getUpdateHttpService())
                         .isGet(false)
@@ -79,7 +79,7 @@ public class XUpdateServiceFragment extends XPageFragment {
                         .update();
                 break;
             case R.id.btn_auto_update:
-                XUpdate.newBuild(getContext())
+                HUpdate.newBuild(getContext())
                         .isGet(false)
                         .updateUrl(XUpdateServiceParser.getVersionCheckUrl())
                         .updateParser(new XUpdateServiceParser())
@@ -88,7 +88,7 @@ public class XUpdateServiceFragment extends XPageFragment {
                         .update();
                 break;
             case R.id.btn_force_update:
-                XUpdate.newBuild(getContext())
+                HUpdate.newBuild(getContext())
                         .isGet(false)
                         .param("appKey", "test3")
                         .updateUrl(XUpdateServiceParser.getVersionCheckUrl())

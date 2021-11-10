@@ -38,9 +38,9 @@ import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 
+import com.xuexiang.xupdate.HUpdate;
 import com.xuexiang.xupdate.R;
-import com.xuexiang.xupdate.XUpdate;
-import com.xuexiang.xupdate._XUpdate;
+import com.xuexiang.xupdate.HUpdateHelper;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.logs.UpdateLog;
 import com.xuexiang.xupdate.proxy.IUpdateProxy;
@@ -83,10 +83,10 @@ public final class UpdateUtils {
             if (updateEntity.isHasUpdate()) {
                 //校验是否是已忽略版本
                 if (UpdateUtils.isIgnoreVersion(updateProxy.getContext(), updateEntity.getVersionName())) {
-                    _XUpdate.onUpdateError(CHECK_IGNORED_VERSION);
+                    HUpdateHelper.onUpdateError(CHECK_IGNORED_VERSION);
                     //校验apk下载缓存目录是否为空
                 } else if (TextUtils.isEmpty(updateEntity.getApkCacheDir())) {
-                    _XUpdate.onUpdateError(CHECK_APK_CACHE_DIR_EMPTY);
+                    HUpdateHelper.onUpdateError(CHECK_APK_CACHE_DIR_EMPTY);
                 } else {
                     updateProxy.findNewVersion(updateEntity, updateProxy);
                 }
@@ -94,7 +94,7 @@ public final class UpdateUtils {
                 updateProxy.noNewVersion(null);
             }
         } else {
-            _XUpdate.onUpdateError(CHECK_PARSE, "json:" + result);
+            HUpdateHelper.onUpdateError(CHECK_PARSE, "json:" + result);
         }
     }
 
@@ -119,7 +119,7 @@ public final class UpdateUtils {
      * @return 当前网络是否是wifi
      */
     public static boolean checkWifi() {
-        ConnectivityManager connectivity = (ConnectivityManager) XUpdate.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivity = (ConnectivityManager) HUpdate.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity == null) {
             return false;
         }
@@ -133,7 +133,7 @@ public final class UpdateUtils {
      * @return 当前是否有网
      */
     public static boolean checkNetwork() {
-        ConnectivityManager connectivity = (ConnectivityManager) XUpdate.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivity = (ConnectivityManager) HUpdate.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity == null) {
             return false;
         }
@@ -315,7 +315,7 @@ public final class UpdateUtils {
         File appFile = getApkFileByUpdateEntity(updateEntity);
         return !TextUtils.isEmpty(updateEntity.getMd5())
                 && FileUtils.isFileExists(appFile)
-                && _XUpdate.isFileValid(updateEntity.getMd5(), appFile);
+                && HUpdateHelper.isFileValid(updateEntity.getMd5(), appFile);
     }
 
     /**
@@ -379,14 +379,14 @@ public final class UpdateUtils {
      * @return
      */
     public static boolean isPrivateApkCacheDir(@NonNull UpdateEntity updateEntity) {
-        return FileUtils.isPrivatePath(XUpdate.getContext(), updateEntity.getApkCacheDir());
+        return FileUtils.isPrivatePath(HUpdate.getContext(), updateEntity.getApkCacheDir());
     }
 
     /**
      * @return 版本更新的默认缓存路径
      */
     public static String getDefaultDiskCacheDirPath() {
-        return UpdateUtils.getDiskCacheDir(XUpdate.getContext(), KEY_XUPDATE);
+        return UpdateUtils.getDiskCacheDir(HUpdate.getContext(), KEY_XUPDATE);
     }
 
     private static boolean isSDCardEnable() {
@@ -453,10 +453,10 @@ public final class UpdateUtils {
             UpdateLog.e("[startActivity failed]: intent == null");
             return false;
         }
-        if (XUpdate.getContext().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+        if (HUpdate.getContext().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
             try {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                XUpdate.getContext().startActivity(intent);
+                HUpdate.getContext().startActivity(intent);
                 return true;
             } catch (ActivityNotFoundException e) {
                 e.printStackTrace();
